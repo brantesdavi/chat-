@@ -1,0 +1,101 @@
+<ion-header [translucent]="true" class="title-header">
+  <ion-toolbar color="primary">
+    <ion-title>Chat +</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" id="popover">
+        <ion-icon slot="icon-only" name="ellipsis-vertical-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-popover #popover trigger="popover" triggerAction="click">
+      <ng-template>
+        <ion-content class="ion-padding ion-text-center" (click)="logout()">
+          <ion-label color="danger">
+            LOGOUT
+          </ion-label>
+        </ion-content>
+      </ng-template>
+    </ion-popover>
+  </ion-toolbar>
+  <ion-segment [value]="segment" mode="md" (ionChange)="onSegmentChanged($event )">
+  <ion-segment-button value="status">
+    <ion-label>Status</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="chats">
+    <ion-label>Chats</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="calls">
+    <ion-label>Calls</ion-label>
+  </ion-segment-button>
+</ion-segment>
+</ion-header>
+
+<ion-content [fullscreen]="true" >
+  <ion-list *ngIf="segment === 'chats'">
+    Recent Chats
+    <ion-item detail>
+      <ion-avatar slot="start">
+        <img [src]="'https://i.pravatar.cc/385'" />
+      </ion-avatar>
+      <ion-label>
+        Davi
+        <p>
+          <ion-text>
+            Message
+          </ion-text>
+        </p>
+      </ion-label>
+      <ion-text slot="end" color="medium">10:00 PM</ion-text>
+    </ion-item>
+    <ion-item detail>
+      <ion-avatar slot="start">
+        <img [src]="'https://i.pravatar.cc/387'" />
+      </ion-avatar>
+      <ion-label>
+        Gabriel
+        <p>
+          <ion-text>
+            Message
+          </ion-text>
+        </p>
+      </ion-label>
+      <ion-text slot="end" color="medium">10:00 PM</ion-text>
+    </ion-item>
+    <ion-item detail>
+      <ion-avatar slot="start">
+        <img [src]="'https://i.pravatar.cc/384'" />
+      </ion-avatar>
+      <ion-label>
+        Joao
+        <p>
+          <ion-text>
+            Message
+          </ion-text>
+        </p>
+      </ion-label>
+      <ion-text slot="end" color="medium">10:00 PM</ion-text>
+    </ion-item>
+  </ion-list>
+
+  <ion-fab slot="fixed" horizontal="end" vertical="bottom">
+    <ion-fab-button (click)="newChat()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-modal #new_chat [isOpen]="open_new_chat" (willDismiss)="onWilllDismiss($event)">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar color="primary">
+          <ion-title>New Chat</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="cancel()">Cancel</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content color="light">
+        <app-user-list></app-user-list>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+</ion-content>
